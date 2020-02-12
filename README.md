@@ -37,7 +37,7 @@ Para a persistência dos dados foi utilizado o banco de dados não relacional Mo
 ### <a name="Config">3.Configurando a API</a>  
 &nbsp;&nbsp;&nbsp;&nbsp;Para utilizar o projeto deverá ser instalado o <a href="http://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html">Java SDK 8</a>, o Eclipse, 
 preferencialmente modificado para o Spring Boot(<a href="https://spring.io/tools/sts/all">Spring Tools Suite</a>) e o 
-<a href="https://www.mongodb.com/download-center?jmp=nav#community">MongoDB Community Server</a> baseado em seu sistema operacional.
+<a href="https://www.mongodb.com/download-center/community">MongoDB Community Server</a> baseado em seu sistema operacional.
 &nbsp;&nbsp;&nbsp;&nbsp;Após isso Efetuar o download do projeto e inserir o mesmo no diretorio raiz do seu workspace do Eclipse.
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;NO MAVEN
@@ -56,7 +56,7 @@ basta executa-lo junto com o mongodb que a api estará rodando em segundo plano,
 
 ### <a name="Testes">4.Efetuando testes</a>  
 
-&nbsp;&nbsp;&nbsp;&nbsp;Com o Eclipse aberto, ir em src/test/Java e rodar o projeto com JUNIT, o sistema efetuará alguns testes de integração e alguns testes unitários, retornando verde se tudo deu certo ou vermelho se algo deu errado.(Normalmente quando você builda o projeto com mvn package ele já efetua os testes sozinho)
+&nbsp;&nbsp;&nbsp;&nbsp;Com o Eclipse aberto, ir em src/test/Java e rodar o projeto com JUNIT4, o sistema efetuará alguns testes de integração e alguns testes unitários, retornando verde se tudo deu certo ou vermelho se algo deu errado.Caso algum teste fique em vermelho, o execute o método sozinho, pois pode ser problema de sincronismo entre os métodos.(Normalmente quando você builda o projeto com mvn package ele já efetua os testes sozinho)
 
 ### <a name="Funcionalidades">5.Funcionalidades</a>
 
@@ -64,10 +64,10 @@ basta executa-lo junto com o mongodb que a api estará rodando em segundo plano,
 
 #### <a name="Insere">I. Inserindo um planeta:</a>  
 
-&nbsp;&nbsp;&nbsp;&nbsp;Para inserir um planeta deve ser feita uma requisição post em json para o endpoint "/planetas".
+&nbsp;&nbsp;&nbsp;&nbsp;Para inserir um planeta deve ser feita uma requisição post em json para o endpoint "/planets".
 
 &nbsp;&nbsp;&nbsp;&nbsp;Ex:
-http://localhost:8080/planetas
+http://localhost:8080/planets
 ```JSON
 {
    "nome": "Yavin IV",
@@ -81,25 +81,25 @@ http://localhost:8080/planetas
 
 #### <a name="Lista">II. Listando todos os planetas:</a>
 
-&nbsp;&nbsp;&nbsp;&nbsp;Para listar todos os planetas basta fazer uma solicitação get para o endpoint "/planetas".
+&nbsp;&nbsp;&nbsp;&nbsp;Para listar todos os planetas basta fazer uma solicitação get para o endpoint "/planets".
 
 &nbsp;&nbsp;&nbsp;&nbsp;Ex:
-http://localhost:8080/planetas
+http://localhost:8080/planets
 
 &nbsp;&nbsp;&nbsp;&nbsp;Será retornado a id dos planetas, seu nome, seu clima, terreno e aparições em filmes no formato json. As aparições dos planetas são atualizadas a cada solicitação get, para caso haja alguma alteração no banco de dados do SWAPI ele retorne as aparições atualizadas. 
 
 #### <a name="buscaid">III. Fazendo busca por ID:</a>
 
-&nbsp;&nbsp;&nbsp;&nbsp;Para fazer uma busca por id você deverá fazer uma solicitação get para o endpoint "/planetas/" junto com a id que você quer pesquisar. 
+&nbsp;&nbsp;&nbsp;&nbsp;Para fazer uma busca por id você deverá fazer uma solicitação get para o endpoint "/planets/" junto com a id que você quer pesquisar. 
 
 &nbsp;&nbsp;&nbsp;&nbsp;Ex:
-http://localhost:8080/planetas/5afcf2bf1d5bad0100e51bda
+http://localhost:8080/planets/5afcf2bf1d5bad0100e51bda
 
 &nbsp;&nbsp;&nbsp;&nbsp;Caso seja inserida uma id inválida, será retornado o erro 404 não encontrado. 
 
 #### <a name="buscanome">IV. Fazendo busca por NOME:</a>
 
-&nbsp;&nbsp;&nbsp;&nbsp;Para fazer uma busca por nome você deverá fazer uma solicitação get para o endpoint "/planetas/buscanome?nome=" junto com o nome codificado que você quer pesquisar. 
+&nbsp;&nbsp;&nbsp;&nbsp;Para fazer uma busca por nome você deverá fazer uma solicitação get para o endpoint "/planets/findname?name=", junto com o nome que você quer pesquisar. Durante meus testes com o Postman não utilizei nenhuma codificação, mas talvez o SoapUI necessite codificar para UTF-8.
 
 &nbsp;&nbsp;&nbsp;&nbsp;Para codificar o valor que você quer, você pode abrir seu navegador, ir em ferramentas de desenvolvedor, depois console e digitar "encodeURIComponent("Nome do planeta")" o console retornará o nome do planeta codificado como no exemplo abaixo.
 
@@ -107,16 +107,16 @@ http://localhost:8080/planetas/5afcf2bf1d5bad0100e51bda
   <img src="img/Exemplo.png"/> 
 </p>
 
-&nbsp;&nbsp;&nbsp;&nbsp;Depois basta copiar o código gerado e inserir no final do endpoint informado acima o ""/planetas/buscanome?nome=".
+&nbsp;&nbsp;&nbsp;&nbsp;Depois basta copiar o código gerado e inserir no final do endpoint informado acima o ""/planets/findname?name=".
 
 &nbsp;&nbsp;&nbsp;&nbsp;Ex:
-http://localhost:8080/planetas/buscanome?nome=Yavin%20IV
+http://localhost:8080/planets/findname?name=Yavin%20IV
 
 #### <a name="deleta">V. Deletando um planeta:</a>
 
-&nbsp;&nbsp;&nbsp;&nbsp;Para deletar um planeta basta fazer uma solicitação delete para o endpoint "/planetas/" indicando a ID do planeta no final do endpoint.
+&nbsp;&nbsp;&nbsp;&nbsp;Para deletar um planeta basta fazer uma solicitação delete para o endpoint "/planets/" indicando a ID do planeta no final do endpoint.
 
-&nbsp;&nbsp;&nbsp;&nbsp;Ex: http://localhost:8080/planetas/1
+&nbsp;&nbsp;&nbsp;&nbsp;Ex: http://localhost:8080/planets/1
 
 &nbsp;&nbsp;&nbsp;&nbsp;Caso esse planeta não exista ele retornará o erro 404 não encontrado.
 
