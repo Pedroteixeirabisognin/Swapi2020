@@ -5,12 +5,14 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Component;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.b2w.apistarwars.model.dao.PlanetDao;
 import br.com.b2w.apistarwars.repository.PlanetRepository;
 
 @Component
+@Profile("!test")
 public class ApiStarWarsRunner implements CommandLineRunner {
 	
 	private PlanetRepository planetrepo;

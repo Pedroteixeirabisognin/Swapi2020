@@ -24,20 +24,23 @@ public class PlanetService {
 		return planetRepository.save(obj);
 	}
 
-	@Cacheable(value="planetdao")
 	public PlanetDao findById(String id) {
 		return  planetRepository.findById(id)
 				.orElseThrow(() -> new ObjectNotFoundException("Id not found!!"));
 	}
 
-	@Cacheable(value="listplanetdao")
+	public List<PlanetDao> findAll(){
+		return planetRepository.findAll();				
+	}
+	
 	public List<PlanetDao> findByName(String name){
 		return planetRepository.findByNameContaining(name)
 				.orElseThrow(() -> new ObjectNotFoundException("Name not found!!"));
 	}
 	
-	public void deletePlanet(String id) {
+	public String deletePlanet(String id) {
 		planetRepository.delete(findById(id));
+		return id;
 	}
 	
 	

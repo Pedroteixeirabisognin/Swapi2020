@@ -24,6 +24,14 @@ public class Planet {
 		this.aparitions = aparitions;
 	}
 	
+	public Planet(String name, String climate, String terrain) {
+		super();
+		this.name = name;
+		this.climate = climate;
+		this.terrain = terrain;
+
+	}
+	
 	
 
 }

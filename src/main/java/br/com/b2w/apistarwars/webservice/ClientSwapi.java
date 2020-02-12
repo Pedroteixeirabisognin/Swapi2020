@@ -1,9 +1,8 @@
 package br.com.b2w.apistarwars.webservice;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -12,63 +11,36 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import br.com.b2w.apistarwars.model.to.PlanetTo;
 import br.com.b2w.apistarwars.model.to.ResponsePlanetTo;
 
 @Component
 public class ClientSwapi {
 	
-	private static final String url = "https://swapi.co/api/planets/";
-	
-	private RestTemplate restTemplate = new RestTemplate();
+	@Value("${starwars.api.url}")
+	private String url;
 
 	
 	@Cacheable(value="responseplanetto")
-	public List<ResponsePlanetTo> getPlanetsFromApi() {
+	public int getPlanetAparition(String name) {
+		RestTemplate restTemplate = new RestTemplate();
 
-			List<ResponsePlanetTo> list = new ArrayList<ResponsePlanetTo>();
-			
-			do {
-
-				if(list.size()== 0) {
-					
-					list.add(restTemplate.exchange(url, HttpMethod.GET,geraHeader(), ResponsePlanetTo.class).getBody());
-
-				}
-				
-				list.add(restTemplate.exchange(list.get(list.size()-1).getNext(), HttpMethod.GET,geraHeader(), ResponsePlanetTo.class).getBody());
-
-				
-			}while(list.get(list.size()-1).getNext()!=null);
-			
-			
-			return list;
-
-
-
-	}
-
-	public int getAparitions(List<ResponsePlanetTo> lista, String name) {
+		ResponsePlanetTo response = new ResponsePlanetTo();
 		
-		
-		for(ResponsePlanetTo x :lista) {
-			
-		
-			for(PlanetTo y : x.getResults()) {
-	
-				if(y.getName().equals(name)) {
+							
+		response = restTemplate.exchange(url+name, HttpMethod.GET,geraHeader(), ResponsePlanetTo.class).getBody();
 
-					return y.getFilms().size();
-				}
-			
-			}
+		try {
+			if(response.getResults().get(0).getName().equals(name))			
+				return response.getResults().get(0).getFilms().size();
+			else
+				return 0;
+		}catch (IndexOutOfBoundsException  e) {
+			return 0;
 		}
-		return 0;
-		
 
 	}
-	
-	
+
+		
 	public HttpEntity<String> geraHeader(){
 		
         HttpHeaders headers = new HttpHeaders();

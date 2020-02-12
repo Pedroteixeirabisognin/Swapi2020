@@ -8,8 +8,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @Document(collection = "Planet")
 public class PlanetDao implements Serializable {
 
@@ -29,6 +31,25 @@ public class PlanetDao implements Serializable {
 	
 	@NotNull
 	private String terrain;
+
+	public PlanetDao(@NotNull String name, @NotNull String climate, @NotNull String terrain) {
+		super();
+		this.name = name;
+		this.climate = climate;
+		this.terrain = terrain;
+	}
+
+	public PlanetDao(String id, @NotNull String name, @NotNull String climate, @NotNull String terrain) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.climate = climate;
+		this.terrain = terrain;
+	}
+	
+	
+	
+	
 	
 	
 }

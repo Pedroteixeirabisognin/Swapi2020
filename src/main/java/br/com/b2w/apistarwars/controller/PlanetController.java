@@ -4,8 +4,6 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,7 +20,6 @@ import br.com.b2w.apistarwars.exception.BadRequest;
 import br.com.b2w.apistarwars.exception.ServiceUnavailable;
 import br.com.b2w.apistarwars.model.Planet;
 import br.com.b2w.apistarwars.model.dao.PlanetDao;
-import br.com.b2w.apistarwars.model.to.ResponsePlanetTo;
 import br.com.b2w.apistarwars.service.PlanetService;
 import br.com.b2w.apistarwars.util.URL;
 import br.com.b2w.apistarwars.webservice.ClientSwapi;
@@ -31,13 +28,9 @@ import br.com.b2w.apistarwars.webservice.ClientSwapi;
 @RequestMapping(value = "/planets")
 public class PlanetController {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(PlanetController.class);
-
 	private ClientSwapi clientSwapi;
 
 	private PlanetService planetService;
-
-	private List<ResponsePlanetTo> result = new ArrayList<ResponsePlanetTo>();
 
 	@Autowired
 	public PlanetController(PlanetService planetService, ClientSwapi clientSwapi) {
@@ -58,23 +51,31 @@ public class PlanetController {
 		
 		try {
 		PlanetDao planet = planetService.findById(id);
-		this.result = clientSwapi.getPlanetsFromApi();
 		return ResponseEntity.ok().body(new Planet(planet.getId(), planet.getName(), planet.getClimate(),
-				planet.getTerrain(),  clientSwapi.getAparitions(this.result,planet.getName())));
+				planet.getTerrain(),  clientSwapi.getPlanetAparition(planet.getName())));
 	
 		}catch (NullPointerException e) {
 			throw new ServiceUnavailable("Error fetching planet");
 		}
 	}
 
+	@GetMapping()
+	public ResponseEntity<List<Planet>> findAll() {
+		List<Planet> response = new ArrayList<Planet>();
+		for (PlanetDao x : planetService.findAll()) {
+
+			response.add(new Planet(x.getId(), x.getName(), x.getClimate(), x.getTerrain(), clientSwapi.getPlanetAparition(x.getName())));
+		}
+		return ResponseEntity.ok().body(response);
+	}
+	
+	
 	@GetMapping(value = "/findname")
 	public ResponseEntity<List<Planet>> findByName(@RequestParam(value = "name", defaultValue = "") String name) {
 		List<Planet> response = new ArrayList<Planet>();
-		this.result = clientSwapi.getPlanetsFromApi();
-		int aparitions = clientSwapi.getAparitions(this.result, name);
 		for (PlanetDao x : planetService.findByName(URL.decodeParam(name))) {
 
-			response.add(new Planet(x.getId(), x.getName(), x.getClimate(), x.getTerrain(), aparitions ));
+			response.add(new Planet(x.getId(), x.getName(), x.getClimate(), x.getTerrain(), clientSwapi.getPlanetAparition(x.getName()) ));
 		}
 		return ResponseEntity.ok().body(response);
 	}
@@ -99,7 +100,6 @@ public class PlanetController {
 				throw new BadRequest("Ground empty");
 			}
 		} catch (Exception e) {
-			LOGGER.error("verifyPlanet()");
 			throw new BadRequest("Error inserting null");
 		}
 		return obj;
