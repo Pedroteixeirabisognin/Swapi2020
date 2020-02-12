@@ -6385,3 +6385,21 @@ Caused by: org.springframework.boot.web.server.PortInUseException: Port 8080 is 
 2020-02-12 00:28:42.289  INFO 8028 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
 2020-02-12 00:28:42.292  INFO 8028 --- [main] b.c.b.a.service.PlanetaServiceTest       : Started PlanetaServiceTest in 3.369 seconds (JVM running for 4.282)
 2020-02-12 00:28:42.427  INFO 8028 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-02-12 20:39:55.371  INFO 13416 --- [main] b.c.b.a.service.PlanetaServiceTest       : Starting PlanetaServiceTest on DESKTOP-CG3JEC5 with PID 13416 (started by Pedro in H:\Users\Pedro\Documents\workspace-sts-3.9.11.RELEASE\apistarwars)
+2020-02-12 20:39:55.391  INFO 13416 --- [main] b.c.b.a.service.PlanetaServiceTest       : The following profiles are active: test
+2020-02-12 20:39:56.079  INFO 13416 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2020-02-12 20:39:56.139  INFO 13416 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 54ms. Found 1 MongoDB repository interfaces.
+2020-02-12 20:39:57.318  INFO 13416 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-02-12 20:39:57.330  INFO 13416 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-02-12 20:39:57.330  INFO 13416 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.30]
+2020-02-12 20:39:57.422  INFO 13416 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-02-12 20:39:57.423  INFO 13416 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1993 ms
+2020-02-12 20:39:57.865  INFO 13416 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-02-12 20:39:58.274  INFO 13416 --- [main] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2020-02-12 20:39:58.274  INFO 13416 --- [main] org.mongodb.driver.cluster               : Adding discovered server localhost:27017 to client view of cluster
+2020-02-12 20:39:58.349  INFO 13416 --- [cluster-ClusterId{value='5e448cced1830a7bda242077', description='null'}-localhost:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:1, serverValue:1}] to localhost:27017
+2020-02-12 20:39:58.358  INFO 13416 --- [cluster-ClusterId{value='5e448cced1830a7bda242077', description='null'}-localhost:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 2, 3]}, minWireVersion=0, maxWireVersion=8, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=4516700}
+2020-02-12 20:39:58.360  INFO 13416 --- [cluster-ClusterId{value='5e448cced1830a7bda242077', description='null'}-localhost:27017] org.mongodb.driver.cluster               : Discovered cluster type of STANDALONE
+2020-02-12 20:39:58.661  INFO 13416 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-02-12 20:39:58.664  INFO 13416 --- [main] b.c.b.a.service.PlanetaServiceTest       : Started PlanetaServiceTest in 3.706 seconds (JVM running for 5.686)
+2020-02-12 20:39:58.828  INFO 13416 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
