@@ -35,10 +35,13 @@
 Para a persistência dos dados foi utilizado o banco de dados não relacional MongoDB e para testes da api o Postman junto com o framework  JUNIT.
 
 ### <a name="Config">3.Configurando a API</a>  
-&nbsp;&nbsp;&nbsp;&nbsp;Para utilizar o projeto deverá ser instalado o <a href="http://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html">Java SDK 8</a>, o Eclipse, 
+&nbsp;&nbsp;&nbsp;&nbsp;Para utilizar o projeto deverá ser instalado o Docker para seu sistema operacional, o <a href="http://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html">Java SDK 8</a>, o Eclipse, 
 preferencialmente modificado para o Spring Boot(<a href="https://spring.io/tools/sts/all">Spring Tools Suite</a>) e o 
 <a href="https://www.mongodb.com/download-center/community">MongoDB Community Server</a> baseado em seu sistema operacional.
 &nbsp;&nbsp;&nbsp;&nbsp;Após isso Efetuar o download do projeto e inserir o mesmo no diretorio raiz do seu workspace do Eclipse.
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;PARA USAR O DOCKER NO WINDOWS
+&nbsp;&nbsp;&nbsp;&nbsp;Clicar em Executar Primeiro.bat ele ira gerar a pasta target com o jar do projeto e após isso clicar em Executar Segundo.bat, ele irá baixar a imagem para executar o projeto, juntamente com a imagem do mongodb, após isso, basta usar o projeto com postman ou o SoapUI
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;NO MAVEN
 &nbsp;&nbsp;&nbsp;&nbsp;Primeiramente instalar o Apache Maven e setar suas variaveis de ambiente corretamente, acessar a pasta raiz
@@ -47,7 +50,7 @@ automatizados e ao terminar de buildar o projeto acessar na pasta raiz a pasta "
 basta executa-lo junto com o mongodb que a api estará rodando em segundo plano, utilize o postman para fazer testes mais facilmente.
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;NO ECLIPSE
-&nbsp;&nbsp;&nbsp;&nbsp;Após importar o projeto, executar o mongoDB e dar Run em Spring Boot App no Eclipse.</br>
+&nbsp;&nbsp;&nbsp;&nbsp;Após importar o projeto, executar o mongoDB, alterar em aplication.properties o host do mongo, descomente localhost e comente mongo, após isso é só dar Run em Spring Boot App no Eclipse.</br>
 &nbsp;&nbsp;&nbsp;&nbsp;Pronto, a API já estará funcionando se o SWAPI estiver online, caso contrário a API retornará um erro 503 indicando que o SWAPI está fora do ar.</br>
 
 &nbsp;&nbsp;&nbsp;&nbsp;<b>Obs1:</b> A propria API gera automaticamente o banco vazio no MongoDB caso não exista. </br>
