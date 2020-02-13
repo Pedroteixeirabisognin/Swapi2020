@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="img/sw.jpg"/> 
+  <img src="img/swgif.gif"/> 
 </div>
 
 # DESAFIO API STAR WARS B2W - PEDRO TEIXEIRA BISOGNIN
